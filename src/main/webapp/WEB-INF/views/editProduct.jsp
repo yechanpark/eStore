@@ -6,12 +6,14 @@
 <div class="container-wrapper">
 	<div class="container">
 
-		<h1>Add Product</h1>
-		<p class="lead">Fill the below information to add a product:</p>
+		<h1>Edit Product</h1>
+		<p class="lead">Fill the below information to edit a product:</p>
 
 		<sf:form
-			action="${pageContext.request.contextPath}/admin/productInventory/addProduct"
+			action="${pageContext.request.contextPath}/admin/productInventory/editProduct"
 			method="post" modelAttribute="product">
+
+			<sf:hidden path="id" />
 
 			<div class="form-group">
 				<label for="name">Name</label>
@@ -36,7 +38,7 @@
 			</div>
 
 			<div class="form-group">
-				<label for="price">Price</label>
+				<label for="price">price</label>
 				<sf:input path="price" id="price" class="form-control" />
 				<sf:errors path="price" cssStyle="color:#ff0000" />
 			</div>
@@ -48,7 +50,7 @@
 			</div>
 
 			<div class="form-group">
-				<label for="manufacturer">Manufacturer</label>
+				<label for="manufacturer">manufacturer</label>
 				<sf:input path="manufacturer" id="manufacturer" class="form-control" />
 				<sf:errors path="manufacturer" cssStyle="color:#ff0000" />
 			</div>

@@ -13,8 +13,24 @@ public class ProductService {
 
 	@Autowired
 	private ProductDao productDao;
-	
+
 	public List<Product> getProducts() {
 		return productDao.getProducts();
+	}
+
+	public boolean addProduct(Product product) {
+		return productDao.addProduct(product);
+	}
+
+	public boolean deleteProductById(int id) {
+		return productDao.deleteProduct(id);
+	}
+
+	public Product getProductById(int id) {
+		return productDao.getProductById(id);
+	}
+
+	public boolean editProduct(Product product) {
+		return productDao.editProduct(product);
 	}
 }

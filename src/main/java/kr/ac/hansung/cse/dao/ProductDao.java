@@ -44,4 +44,64 @@ public class ProductDao {
 
 		});
 	}
+
+	public boolean addProduct(Product product) {
+		// id는 DB에서 Auto Increment
+		String name = product.getName();
+		String category = product.getCategory();
+		int price = product.getPrice();
+		String manufacturer = product.getManufacturer();
+		int unitInStock = product.getUnitInStock();
+		String description = product.getDescription();
+
+		String sqlStatement = "insert into product (name, category, price, manufacturer, unitInStock, description) "
+				+ "values (?,?,?,?,?,?)";
+
+		return (jdbcTemplateObject.update(sqlStatement,
+				new Object[] { name, category, price, manufacturer, unitInStock, description }) == 1);
+	}
+
+	public boolean deleteProduct(int id) {
+		String sqlStatement = "delete from product where id=?";
+		return (jdbcTemplateObject.update(sqlStatement, new Object[] { id }) == 1);
+	}
+
+	public Product getProductById(int id) {
+		String sqlStatement = "select * from product where id=?";
+		return jdbcTemplateObject.queryForObject(sqlStatement, new Object[] { id }, new RowMapper<Product>() {
+
+			@Override
+			public Product mapRow(ResultSet rs, int rowNum) throws SQLException {
+				Product product = new Product();
+
+				product.setId(rs.getInt("id"));
+				product.setName(rs.getString("name"));
+				product.setCategory(rs.getString("category"));
+				product.setPrice(rs.getInt("price"));
+				product.setManufacturer(rs.getString("manufacturer"));
+				product.setUnitInStock(rs.getInt("unitInStock"));
+				product.setDescription(rs.getString("description"));
+
+				return product;
+			}
+
+		});
+	}
+
+	public boolean editProduct(Product product) {
+		int id = product.getId();
+		String name = product.getName();
+		String category = product.getCategory();
+		int price = product.getPrice();
+		String manufacturer = product.getManufacturer();
+		int unitInStock = product.getUnitInStock();
+		String description = product.getDescription();
+
+		String sqlStatement = "update product set name=?, category=?, price=?, "
+				+ "manufacturer=?, unitInStock=?, description=? where id=?";
+
+		return (jdbcTemplateObject.update(sqlStatement,
+				new Object[] { name, category, price, manufacturer, unitInStock, description, id }) == 1);
+
+	}
 }

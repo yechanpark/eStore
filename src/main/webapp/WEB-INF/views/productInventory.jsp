@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-
+<%@ taglib uri="http://www.springframework.org/tags" prefix="spring"%>
 <div class="container-wrapper">
 	<div class="container">
 		<h2>Product Inventory Page</h2>
@@ -15,6 +15,7 @@
 					<th>Manufacturer</th>
 					<th>unitInStock</th>
 					<th>Description</th>
+					<th></th>
 				</tr>
 			</thead>
 			<tbody>
@@ -26,6 +27,12 @@
 						<td>${product.manufacturer}</td>
 						<td>${product.unitInStock}</td>
 						<td>${product.description}</td>
+						<td><a href="<spring:url value="/admin/productInventory/deleteProduct/${product.id}"/>">
+							<span class="glyphicon glyphicon-remove"></span>
+							</a></td>
+						<td><a href="<spring:url value="/admin/productInventory/editProduct/${product.id}"/>">
+							<span class="glyphicon glyphicon-pencil"></span>
+							</a></td>
 					</tr>
 				</c:forEach>
 			</tbody>
