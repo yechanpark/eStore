@@ -3,6 +3,7 @@ package kr.ac.hansung.cse.model;
 import javax.validation.constraints.Min;
 
 import org.hibernate.validator.constraints.NotEmpty;
+import org.springframework.web.multipart.MultipartFile;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -29,4 +30,7 @@ public class Product {
 	private int unitInStock;
 	
 	private String description;
+	
+	private MultipartFile productImage;
+	private String imageFilename; // DB에 저장되는 값
 }

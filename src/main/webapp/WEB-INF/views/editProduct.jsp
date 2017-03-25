@@ -11,7 +11,7 @@
 
 		<sf:form
 			action="${pageContext.request.contextPath}/admin/productInventory/editProduct"
-			method="post" modelAttribute="product">
+			method="post" modelAttribute="product" enctype="multipart/form-data">
 
 			<sf:hidden path="id" />
 
@@ -38,7 +38,7 @@
 			</div>
 
 			<div class="form-group">
-				<label for="price">price</label>
+				<label for="price">Price</label>
 				<sf:input path="price" id="price" class="form-control" />
 				<sf:errors path="price" cssStyle="color:#ff0000" />
 			</div>
@@ -54,6 +54,13 @@
 				<sf:input path="manufacturer" id="manufacturer" class="form-control" />
 				<sf:errors path="manufacturer" cssStyle="color:#ff0000" />
 			</div>
+
+			<div class="form-group">
+				<label for="productImage">Upload Picture</label>
+				<sf:input path="productImage" id="productImage" type="file"
+					class="form-control" />
+			</div>
+
 
 			<br>
 

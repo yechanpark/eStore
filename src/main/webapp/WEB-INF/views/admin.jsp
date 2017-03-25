@@ -9,7 +9,7 @@
 	</div>
 
 	<div class="container">
-		<a href="<c:url value="/admin/productInventory"/>"><h2>Product Inventory</h2></a>
+		<h2><a href="<c:url value="/admin/productInventory"/>">Product Inventory</a></h2>
 		<p class="lead">Here you can view, check and modify the product inventory !!</p>
 	</div>
 </div>

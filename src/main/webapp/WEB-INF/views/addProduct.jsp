@@ -11,7 +11,7 @@
 
 		<sf:form
 			action="${pageContext.request.contextPath}/admin/productInventory/addProduct"
-			method="post" modelAttribute="product">
+			method="post" modelAttribute="product" enctype="multipart/form-data">
 
 			<div class="form-group">
 				<label for="name">Name</label>
@@ -53,6 +53,11 @@
 				<sf:errors path="manufacturer" cssStyle="color:#ff0000" />
 			</div>
 
+			<div class="form-group">
+				<label for="productImage">Upload Picture</label>
+				<sf:input path="productImage" id="productImage" type="file" class="form-control" />
+			</div>
+			
 			<br>
 
 			<input type="submit" value="submit" class="btn btn-default">
