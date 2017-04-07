@@ -73,7 +73,7 @@ public class AdminController {
 
 			return "addProduct";
 		}
-		/* 리소스 이미지 저장 */
+		/* 리소스 이미지 저장 -> 4-6.imageUpload.mp4 30:00 참조*/
 		MultipartFile productImage = product.getProductImage();
 		// 루트 디렉토리를 가져옴 -> 배포 시에 사용 경로가 모두 다르기 때문
 		String rootDirectory = request.getSession().getServletContext().getRealPath("/");
