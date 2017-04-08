@@ -131,7 +131,6 @@ public class AdminController {
 	public String editProduct(@PathVariable int id, Model model) {
 
 		Product product = productService.getProductById(id);
-
 		model.addAttribute("product", product);
 
 		return "editProduct";

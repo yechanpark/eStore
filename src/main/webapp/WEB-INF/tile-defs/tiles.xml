@@ -41,6 +41,11 @@
 		<put-attribute name="body" value="/WEB-INF/views/editProduct.jsp" />
 	</definition>
 	
+	<definition name="viewProduct" extends="base">
+		<put-attribute name="title" value="View Product Page" />
+		<put-attribute name="body" value="/WEB-INF/views/viewProduct.jsp" />
+	</definition>
+	
 	<definition name="login" extends="base">
 		<put-attribute name="title" value="Login Page" />
 		<put-attribute name="body" value="/WEB-INF/views/login.jsp" />
