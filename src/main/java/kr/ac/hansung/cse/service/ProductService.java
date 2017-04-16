@@ -17,20 +17,26 @@ public class ProductService {
 	public List<Product> getProducts() {
 		return productDao.getProducts();
 	}
-
-	public boolean addProduct(Product product) {
-		return productDao.addProduct(product);
+	
+	// hibernate사용 이후 리턴타입  boolean -> void변경
+	public void addProduct(Product product) {
+		/*return*/ productDao.addProduct(product);
 	}
-
+	
+	/* hibernate사용 이후 바뀜
 	public boolean deleteProductById(int id) {
 		return productDao.deleteProduct(id);
+	}*/
+	public void deleteProduct(Product product) {
+		productDao.deleteProduct(product);
 	}
-
+	
 	public Product getProductById(int id) {
 		return productDao.getProductById(id);
 	}
-
-	public boolean editProduct(Product product) {
-		return productDao.editProduct(product);
+	
+	// hibernate사용 이후 리턴타입  boolean -> void변경
+	public void editProduct(Product product) {
+		/*return*/ productDao.editProduct(product);
 	}
 }

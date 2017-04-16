@@ -96,8 +96,11 @@ public class AdminController {
 
 		product.setImageFilename(productImage.getOriginalFilename());
 
+		/*hibernate 이후로 변경
 		if (!productService.addProduct(product))
-			System.out.println("Adding Product cannot be done");
+			System.out.println("Adding Product cannot be done");*/
+		productService.addProduct(product);
+			
 
 		// getProducts(Model model)로 redirect
 		return "redirect:/admin/productInventory";
@@ -120,10 +123,11 @@ public class AdminController {
 				e.printStackTrace();
 			}
 		}
-		
+		/*hibernate 이후로 변경
 		if (!productService.deleteProductById(id))
-			System.out.println("Deleting product cannot be done");
-
+			System.out.println("Deleting product cannot be done");*/
+		productService.deleteProduct(product);
+		
 		return "redirect:/admin/productInventory";
 	}
 
@@ -168,8 +172,10 @@ public class AdminController {
 
 		product.setImageFilename(productImage.getOriginalFilename());
 
+		/*hibernate 이후로 변경
 		if (!productService.editProduct(product))
-			System.out.println("Editing Product cannot be done");
+			System.out.println("Editing Product cannot be done");*/
+		productService.editProduct(product);
 
 		return "redirect:/admin/productInventory";
 	}
