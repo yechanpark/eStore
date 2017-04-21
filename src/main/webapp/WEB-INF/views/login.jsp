@@ -25,7 +25,7 @@
 			</div>
 			
 			<div class="form-group">
-				<label for="pwd">Password:</label>
+				<label for="password">Password:</label>
 				<!-- name 값은 반드시 "password"이어야 한다. -->
 				<input type="password" class="form-control" name="password" style="width:50%">
 			</div>
