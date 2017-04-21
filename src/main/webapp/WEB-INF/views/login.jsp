@@ -16,7 +16,7 @@
 		
 		<!-- login 의 POST Method로 이동 -->
 		<!-- login GET : 네비게이션 바에서 Login버튼 클릭 해서 "/login"이동 시 -->
-		<!-- login POST : "/admin/**" 접근 시 권한이 없어서 SpringSecurity에 의해 자동적으로 "/login"이동 시 -->
+		<!-- login POST : 로그인 폼 입력 후 확인버튼을 누르면 POST방식으로 "/login"이동 시 Spring에 의해 처리된다.  -->
 		<form action="<c:url value="/login"/>" method="post">
 			<div class="form-group">
 				<label for="username">Username:</label>
