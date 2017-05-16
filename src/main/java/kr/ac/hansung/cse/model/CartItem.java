@@ -25,16 +25,16 @@ public class CartItem implements Serializable {
 	@Id
 	@GeneratedValue
 	private int cartItemId;
-	
+
 	@ManyToOne
-	@JoinColumn(name="cartId") // foreign key "cartId"지정
+	@JoinColumn(name = "cartId") // foreign key "cartId"지정
 	@JsonIgnore // JSON으로 변환하지 않음 -> 싸이클 끊음
-	private Cart cart; 
-	
+	private Cart cart;
+
 	@ManyToOne
-	@JoinColumn(name="productId") // foreign key "productId"지정
+	@JoinColumn(name = "productId") // foreign key "productId"지정
 	private Product product;
-	
+
 	private int quantity;
 	private double totalPrice;
 }

@@ -39,9 +39,9 @@ public class CartRestController {
 	@Autowired
 	private ProductService productService;
 
-	// 카트ID를 바탕으로 Cart정보를 검색
+	// cartId를 바탕으로 Cart정보를 검색
 	@RequestMapping(value = "/{cartId}", method = RequestMethod.GET)
-	public ResponseEntity<Cart> getCartById(@PathVariable(value = "cartID") int cartId) {
+	public ResponseEntity<Cart> getCartById(@PathVariable(value = "cartId") int cartId) {
 
 		Cart cart = cartService.getCartById(cartId);
 
@@ -52,7 +52,7 @@ public class CartRestController {
 
 	// 카트에 담을 때
 	@RequestMapping(value = "/add/{productId}", method = RequestMethod.PUT)
-	public ResponseEntity<Void> addItem(@PathVariable(value = "productID") int productId) {
+	public ResponseEntity<Void> addItem(@PathVariable(value = "productId") int productId) {
 
 		// 로그인한 사람에 대한 정보를 기반으로 SpringSecurity에 의해 이름을 얻어올 수 있다.
 		// servetl-context.xml에 관련 설정을 해야한다.

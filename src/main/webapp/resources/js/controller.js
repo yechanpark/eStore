@@ -17,11 +17,12 @@ cartApp.controller("cartCtrl", function($scope, $http) {
 		// $http의 get method사용, Rest API(CartRestController)의 getCartById()를
 		// 호출(Request보냄)
 		$http.get('/eStore/rest/cart/' + $scope.cartId).then(
-		// 성공했을 경우(then) Rest API에 의해 반환된 Response를 가지고 Cart에 집어넣는다.
-		function successCallback(response) {
-			// getCartById()의 반환 값 (Body에 있는 내용 = cart객체)이 response.data에 해당
-			$scope.cart = response.data;
-		});
+				// 성공했을 경우(then) Rest API에 의해 반환된 Response를 가지고 Cart에 집어넣는다.
+				function successCallback(response) {
+					// getCartById()의 반환 값 (Body에 있는 내용 = cart객체)이 response.data에 해당
+					$scope.cart = response.data;
+				}
+		);
 	};
 
 	$scope.addToCart = function(productId) {
@@ -39,7 +40,8 @@ cartApp.controller("cartCtrl", function($scope, $http) {
 					// 실패시
 				}, function errorCallback() {
 					alert("Adding to the cart failed!")
-				});
+				}
+		);
 
 	};
 
@@ -50,15 +52,19 @@ cartApp.controller("cartCtrl", function($scope, $http) {
 
 		$scope.setCsrfToken();
 
-		$http({
-			method : 'DELETE',
-			url : '/eStore/rest/cart/cartitem/' + productId
-		}).then(function successCallback() {
-			$scope.refreshCart();
+		$http(
+				{
+					method : 'DELETE',
+					url : '/eStore/rest/cart/cartitem/' + productId
+				}
+		).then(
+			function successCallback() {
+				$scope.refreshCart();
 
-		}, function errorCallback(response) {
-			console.log(response.data);
-		});
+			}, function errorCallback(response) {
+				console.log(response.data);
+			}
+		);
 
 	};
 
@@ -66,14 +72,18 @@ cartApp.controller("cartCtrl", function($scope, $http) {
 
 		$scope.setCsrfToken();
 
-		$http({
-			method : 'DELETE',
-			url : '/eStore/rest/cart/' + $scope.cartId
-		}).then(function successCallback() {
-			$scope.refreshCart();
-		}, function errorCallback(response) {
-			console.log(response.data);
-		});
+		$http(
+			{
+				method : 'DELETE',
+				url : '/eStore/rest/cart/' + $scope.cartId
+			}
+		).then(
+			function successCallback() {
+				$scope.refreshCart();
+			}, function errorCallback(response) {
+				console.log(response.data);
+			}
+		);
 
 	};
 
@@ -92,10 +102,10 @@ cartApp.controller("cartCtrl", function($scope, $http) {
 
 	$scope.setCsrfToken = function() {
 		// 헤더에 CSRF 토큰 정보가 들어간다. contoller.js의 각 함수 실행 마다 이 함수를 호출하게 한다.
-		var csrfToken = $("meta[name='csrf']").attr("content");
+		var csrfToken = $("meta[name='_csrf']").attr("content");
 		var csrfHeader = $("meta[name='_csrf_header']").attr("content");
 
 		$http.defaults.headers.common[csrfHeader] = csrfToken;
-	}
+	};
 
 });

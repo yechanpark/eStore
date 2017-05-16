@@ -14,7 +14,7 @@
 <meta name="author" content="">
 
 <meta name="_csrf" content="${_csrf.token}"/>
-<!-- defualt header name is X-SCRF-TOKEN -->
+<!-- default header name is X-CSRF-TOKEN -->
 <meta name="_csrf_header" content="${_csrf.headerName}"/>
 
 <link rel="icon" href="../../favicon.ico">
@@ -31,7 +31,7 @@
 <link href="<c:url value="/resources/css/main.css"/>" rel="stylesheet">
 
 <!-- AngularJS -->
-<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
 
 <!-- JQuery -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>

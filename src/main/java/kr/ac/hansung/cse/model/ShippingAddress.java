@@ -17,7 +17,7 @@ import lombok.ToString;
 public class ShippingAddress implements Serializable {
 
 	private static final long serialVersionUID = 3273994294229576271L;
-	
+
 	@Id
 	@GeneratedValue
 	private int id;
