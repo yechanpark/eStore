@@ -30,11 +30,17 @@
 						<!-- 로그인한 경우 -->
 						<c:if test="${pageContext.request.userPrincipal.name != null}">
 							<li> <a>Welcome:${pageContext.request.userPrincipal.name}</a></li>
-
-							<!-- admin이 로그인한 경우 -->
+							
+							<!-- 일반 유저가 로그인한 경우 Cart를 보여줌 -->
+							<c:if test="${pageContext.request.userPrincipal.name != 'admin'}">
+								<li><a href="<c:url value="/cart"/>">Cart</a></li>
+							</c:if>
+							
+							<!-- admin이 로그인한 경우 adminPage를 보여줌-->
 							<c:if test="${pageContext.request.userPrincipal.name == 'admin'}">
 								<li><a href="<c:url value="/admin"/>">AdminPage</a></li>
 							</c:if>
+							
 							<li><a href="<c:url value="/logout"/>">Logout</a></li>
 						</c:if>
 

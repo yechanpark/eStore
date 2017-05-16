@@ -1,13 +1,10 @@
 package kr.ac.hansung.cse.model;
 
+import java.io.Serializable;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToOne;
-
-import org.hibernate.annotations.GenericGenerator;
-import org.hibernate.annotations.Parameter;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -17,17 +14,15 @@ import lombok.ToString;
 @Setter
 @ToString
 @Entity
-public class ShippingAddress {
+public class ShippingAddress implements Serializable {
+
+	private static final long serialVersionUID = 3273994294229576271L;
+	
 	@Id
-	@GeneratedValue(generator = "myGenerator")
-	@GenericGenerator(name = "myGenerator", strategy = "foreign",
-					parameters = @Parameter(value = "user", name = "property"))
+	@GeneratedValue
 	private int id;
 	private String address;
 	private String country;
 	private String zipCode; // 우편번호
 
-	@OneToOne
-	@JoinColumn(name = "userId")
-	private User user;
 }
