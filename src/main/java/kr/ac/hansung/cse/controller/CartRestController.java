@@ -70,7 +70,9 @@ public class CartRestController {
 				CartItem cartItem = cartItems.get(i);
 				cartItem.setQuantity(cartItem.getQuantity() + 1);
 				cartItem.setTotalPrice(product.getPrice() * cartItem.getQuantity());
+				cart.setGrandTotal(cart.getGrandTotal() + product.getPrice());
 				cartItemService.addCartItem(cartItem);
+				cartService.updateCart(cart);
 
 				return new ResponseEntity<Void>(HttpStatus.OK);
 			}
@@ -80,11 +82,13 @@ public class CartRestController {
 		cartItem.setProduct(product);
 		cartItem.setQuantity(1);
 		cartItem.setTotalPrice(product.getPrice() * cartItem.getQuantity());
+		cart.setGrandTotal(cart.getGrandTotal() + cartItem.getTotalPrice());
 		cartItem.setCart(cart);
 
 		cartItemService.addCartItem(cartItem);
 
 		cart.getCartItems().add(cartItem);
+		cartService.updateCart(cart);
 		product.getCartItemList().add(cartItem);
 
 		return new ResponseEntity<>(HttpStatus.OK);
@@ -102,7 +106,12 @@ public class CartRestController {
 		Cart cart = user.getCart();
 
 		CartItem cartItem = cartItemService.getCartItemByProductId(cart.getCartId(), productId);
+		cart.setGrandTotal(cart.getGrandTotal() - cartItem.getTotalPrice());
+		
+		cartService.updateCart(cart);
 		cartItemService.removeCartItem(cartItem);
+		
+		
 
 		return new ResponseEntity<Void>(HttpStatus.NO_CONTENT);
 
@@ -113,8 +122,12 @@ public class CartRestController {
 	public ResponseEntity<Void> clearCart(@PathVariable(value = "cartId") int cartId) {
 
 		Cart cart = cartService.getCartById(cartId);
+		cart.setGrandTotal(0);
+		
+		cartService.updateCart(cart);
 		cartItemService.removeAllCartItems(cart);
-
+		
+		
 		return new ResponseEntity<Void>(HttpStatus.NO_CONTENT);
 
 	}

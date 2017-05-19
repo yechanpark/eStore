@@ -19,5 +19,10 @@ public class CartDao {
 		Session session = sessionFactory.getCurrentSession();
 		return (Cart) session.get(Cart.class, cartId);
 	}
+	
+	public void updateCart(Cart cart){
+		Session session = sessionFactory.getCurrentSession();
+		session.saveOrUpdate(cart);
+	}
 
 }
