@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<configuration>
+	<!-- 콘솔 관련 -->
+	<appender name="consoleAppender" class="ch.qos.logback.core.ConsoleAppender">
+		<encoder>
+					<!--시    분   초         스레드명  왼쪽정렬 5자리 고정레벨출력    로거이름 36자 출력   -   메시지  줄바꿈  -->
+			<Pattern>%d{HH:mm:ss} [%thread] %-5level %logger{36} - %msg %n
+			</Pattern>
+		</encoder>
+	</appender>
+
+	<!-- 파일관련1 -->
+	<appender name="dailyRollingFileAppender"
+		class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<!-- 오늘 저장될 로그파일 -->
+		<File>c:/tmp/rest-demo.log</File>
+		
+		<!-- 하루 이상 지난 로그파일, 최대 30개 까지 유지 -->
+		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<!-- daily rollover -->
+			<FileNamePattern>rest-demo.%d{yyyy-MM-dd}.log</FileNamePattern>
+
+			<!-- keep 30 days' worth of history -->
+			<maxHistory>30</maxHistory>
+		</rollingPolicy>
+
+		<encoder>
+			<Pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{35} - %msg %n
+			</Pattern>
+		</encoder>
+	</appender>
+
+	<!-- 파일관련2 -->
+	<appender name="minuteRollingFileAppender"
+		class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<!-- rollover every minute -->
+			<FileNamePattern>c:/tmp/minutes/rest-demo-minute.%d{yyyy-MM-dd_HH-mm}.log
+			</FileNamePattern>
+
+			<!-- keep 30 minutes' worth of history -->
+			<maxHistory>30</maxHistory>
+		</rollingPolicy>
+
+		<encoder>
+			<Pattern>%-4relative [%thread] %-5level %logger{35} - %msg %n
+			</Pattern>
+		</encoder>
+	</appender>
+
+	<!-- additivity가 false로 되어있기 때문에 root로거의 consoleAppender는 추가하지 않음 -->
+	<logger name="kr.ac.hansung.cse" additivity="false">
+		<level value="INFO" />
+		<!-- 3군데에 로깅 -->
+		<appender-ref ref="dailyRollingFileAppender" />
+		<appender-ref ref="minuteRollingFileAppender" />
+		<appender-ref ref="consoleAppender" />
+	</logger>
+
+	<!-- 최상단 로거, 하위 로거에게 상속된다. -->
+	<root>
+		<level value="INFO" />
+		<!-- 콘솔에 로깅 -->
+		<appender-ref ref="consoleAppender" />
+	</root>
+</configuration>
