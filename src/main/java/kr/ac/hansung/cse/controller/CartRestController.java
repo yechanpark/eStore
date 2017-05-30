@@ -2,6 +2,10 @@ package kr.ac.hansung.cse.controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -119,8 +123,14 @@ public class CartRestController {
 
 	// 해당 CartItem Quantity 1개 증가
 	@RequestMapping(value = "/cartitem/add/{productId}", method = RequestMethod.PUT)
-	public ResponseEntity<Void> plusQuantityToCart(@PathVariable(value = "productId") int productId) {
+	public ResponseEntity<Void> plusQuantityToCart(@PathVariable(value = "productId") int productId,
+			HttpServletRequest request) {
 
+		Logger logger = LoggerFactory.getLogger(CartRestController.class);
+		String requestMessage = request.toString();
+		
+		logger.info("Request Message:" + requestMessage);
+		
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 
 		String username = authentication.getName();
@@ -131,18 +141,20 @@ public class CartRestController {
 
 		for (int i = 0; i < cartItems.size(); i++) {
 			CartItem cartItem = cartItems.get(i);
+			Product product = cartItem.getProduct();
 
-			// 해당하는 Product에 대해
-			if (cartItem.getProduct().getId() == productId) {
+			// 해당하는 버튼을 누른 Product와 현재 카트에 있는 CartItem의 Product와 비교
+			if (product.getId() == productId) {
 
 				// 현재 카트에 추가된 갯수보다 재고가 많은 경우
-				if (cartItem.getProduct().getUnitInStock() > cartItem.getQuantity()) {
+				if (product.getUnitInStock() > cartItem.getQuantity()) {
 
-					// 갯수와 가격을 설정
+					// 갯수 : 1증가, 카트아이템 전체 가격 : (현재 총 가격 + Product가격)
 					cartItem.setQuantity(cartItem.getQuantity() + 1);
-					cartItem.setTotalPrice(cartItem.getTotalPrice() + cartItem.getProduct().getPrice());
-					// 카트 전체에 반영
-					cart.setGrandTotal(cart.getGrandTotal() + cartItem.getProduct().getPrice());
+					cartItem.setTotalPrice(cartItem.getTotalPrice() + product.getPrice());
+
+					// 카트 전체가격 반영
+					cart.setGrandTotal(cart.getGrandTotal() + product.getPrice());
 
 					// Cart와 CartItem저장
 					cartItemService.updateCartItem(cartItem);
@@ -150,7 +162,12 @@ public class CartRestController {
 				}
 			}
 		}
-		return new ResponseEntity<Void>(HttpStatus.NO_CONTENT);
+		
+		ResponseEntity<Void> response = new ResponseEntity<Void>(HttpStatus.OK);
+		String responseMessage = response.toString();
+		logger.info(responseMessage);
+		
+		return response;
 
 	}
 
@@ -168,18 +185,20 @@ public class CartRestController {
 
 		for (int i = 0; i < cartItems.size(); i++) {
 			CartItem cartItem = cartItems.get(i);
+			Product product = cartItem.getProduct();
 
 			// 해당하는 Product에 대해
-			if (cartItem.getProduct().getId() == productId) {
+			if (product.getId() == productId) {
 
 				// 현재 카트에 추가된 갯수가 0보다 큰 경우
 				if (cartItem.getQuantity() > 0) {
 
-					// 갯수와 가격을 설정
+					// 갯수 : 1감소, 카트아이템 전체 가격 : (현재 총 가격 - Product가격)
 					cartItem.setQuantity(cartItem.getQuantity() - 1);
-					cartItem.setTotalPrice(cartItem.getTotalPrice() - cartItem.getProduct().getPrice());
-					// 카트 전체에 반영
-					cart.setGrandTotal(cart.getGrandTotal() - cartItem.getProduct().getPrice());
+					cartItem.setTotalPrice(cartItem.getTotalPrice() - product.getPrice());
+
+					// 카트 전체가격 반영
+					cart.setGrandTotal(cart.getGrandTotal() - product.getPrice());
 
 					// Cart와 CartItem저장
 					cartItemService.updateCartItem(cartItem);
@@ -188,7 +207,7 @@ public class CartRestController {
 			}
 		}
 
-		return new ResponseEntity<Void>(HttpStatus.NO_CONTENT);
+		return new ResponseEntity<Void>(HttpStatus.OK);
 
 	}
 

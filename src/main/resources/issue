@@ -1,0 +1,8 @@
+1. User가 카트 추가하고 나서 관리자가 Product를 지워도 User의 카트에는 그대로 남아있음
+
+2. CartRestController.java - addItem 함수 수정해야함
+ 처음 담을 때와 이미 존재할 때의 로직을 나눠야 한다. 현재는 cart.jsp에서 +plus, -minus버튼도 동작하지만, Order Now버튼을 누를 때 마다 갯수가 1개 늘어나므로
+ 이를 이미 있는 경우는 이미 존재한다고 alert창을 띄우고, 처음 추가하는 경우에만 제대로 동작하게 변경해야한다.
+ Quantity는 오직 +plus, -minus로만 수정할 수 있게 해야한다. 
+ 
+3. +plus, -minus 버튼을 누르면 화면이 맨 위로 이동한다. -> 광클하기가 힘듦 

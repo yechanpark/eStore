@@ -42,9 +42,9 @@
 						<td><a href="#" class="label label-danger" ng-click="removeFromCart(item.product.id)">
 							<span class="glyphicon glyphicon-remove"></span>remove</a>
 							<a href="#" class="label label-danger" ng-click="plusQuantityToCart(item.product.id)">
-							<span class="glyphicon glypgicon-plus"></span>plus</a>
+							<span class="glyphicon glyphicon-plus"></span>plus</a>
 							<a href="#" class="label label-danger" ng-click="minusQuantityToCart(item.product.id)">
-							<span class="glyphicon glypgicon-minus"></span>minus</a></td>
+							<span class="glyphicon glyphicon-minus"></span>minus</a></td>
 					</tr>
 					
 					<tr>

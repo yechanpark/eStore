@@ -5,7 +5,7 @@ var cartApp = angular.module('cartApp', []);
 // $http의 경우 remote서버로부터 data를 읽기 위한 Angular JS의 서비스이다.
 cartApp.controller("cartCtrl", function($scope, $http) {
 
-	/* method를 $scope에 추가 */
+	/* methods를 $scope에 추가 */
 
 	// carId를 사용하여 $scope에 바인딩
 	$scope.initCartId = function(cartId) {
