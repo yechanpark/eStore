@@ -19,7 +19,7 @@ public class CartItemDao {
 	@Autowired
 	private SessionFactory sessionFactory;
 
-	public void addCartItem(CartItem cartItem) {
+	public void updateCartItem(CartItem cartItem) {
 		Session session = sessionFactory.getCurrentSession();
 		session.saveOrUpdate(cartItem);
 		session.flush();
@@ -46,8 +46,8 @@ public class CartItemDao {
 		Session session = sessionFactory.getCurrentSession();
 		Query query = session.createQuery("from CartItem where cart.cartId = :cid and product.id = :pid");
 
-		query.setInteger("cid", cartId);
-		query.setInteger("pid", productId);
+		query.setParameter("cid", cartId);
+		query.setParameter("pid", productId);
 
 		return (CartItem) query.uniqueResult();
 	}

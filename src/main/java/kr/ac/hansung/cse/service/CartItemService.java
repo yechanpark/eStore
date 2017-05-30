@@ -13,8 +13,8 @@ public class CartItemService {
 	@Autowired
 	private CartItemDao cartItemDao;
 
-	public void addCartItem(CartItem cartItem) {
-		cartItemDao.addCartItem(cartItem);
+	public void updateCartItem(CartItem cartItem) {
+		cartItemDao.updateCartItem(cartItem);
 	}
 
 	public void removeCartItem(CartItem cartItem) {
@@ -28,5 +28,4 @@ public class CartItemService {
 	public CartItem getCartItemByProductId(int cartId, int productId) {
 		return cartItemDao.getCartItemByProductId(cartId, productId);
 	}
-
 }

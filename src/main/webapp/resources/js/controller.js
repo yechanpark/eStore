@@ -17,12 +17,11 @@ cartApp.controller("cartCtrl", function($scope, $http) {
 		// $http의 get method사용, Rest API(CartRestController)의 getCartById()를
 		// 호출(Request보냄)
 		$http.get('/eStore/rest/cart/' + $scope.cartId).then(
-				// 성공했을 경우(then) Rest API에 의해 반환된 Response를 가지고 Cart에 집어넣는다.
-				function successCallback(response) {
-					// getCartById()의 반환 값 (Body에 있는 내용 = cart객체)이 response.data에 해당
-					$scope.cart = response.data;
-				}
-		);
+		// 성공했을 경우(then) Rest API에 의해 반환된 Response를 가지고 Cart에 집어넣는다.
+		function successCallback(response) {
+			// getCartById()의 반환 값 (Body에 있는 내용 = cart객체)이 response.data에 해당
+			$scope.cart = response.data;
+		});
 	};
 
 	$scope.addToCart = function(productId) {
@@ -33,15 +32,14 @@ cartApp.controller("cartCtrl", function($scope, $http) {
 		// 호출(Request보냄). shortcut 방식.
 		// 카트에 1개의 항목을 담는다.
 		$http.put('/eStore/rest/cart/add/' + productId).then(
-				// 성공 시
-				function successCallback() {
-					alert("Product successfully added to the cart!");
+		// 성공 시
+		function successCallback() {
+			alert("Product successfully added to the cart!");
 
-					// 실패시
-				}, function errorCallback() {
-					alert("Adding to the cart failed!")
-				}
-		);
+			// 실패시
+		}, function errorCallback() {
+			alert("Adding to the cart failed!")
+		});
 
 	};
 
@@ -52,38 +50,58 @@ cartApp.controller("cartCtrl", function($scope, $http) {
 
 		$scope.setCsrfToken();
 
-		$http(
-				{
-					method : 'DELETE',
-					url : '/eStore/rest/cart/cartitem/' + productId
-				}
-		).then(
-			function successCallback() {
-				$scope.refreshCart();
+		$http({
+			method : 'DELETE',
+			url : '/eStore/rest/cart/cartitem/' + productId
+		}).then(function successCallback() {
+			$scope.refreshCart();
 
-			}, function errorCallback(response) {
-				console.log(response.data);
-			}
-		);
+		}, function errorCallback(response) {
+			console.log(response.data);
+		});
 
+	};
+
+	$scope.plusQuantityToCart = function(productId) {
+
+		$scope.setCsrfToken();
+
+		$http({
+			method : 'PUT',
+			url : '/eStore/rest/cart/cartitem/add/' + productId
+		}).then(function successCallback() {
+			$scope.refreshCart();
+		}, function errorCallback(response) {
+			console.log(response.data);
+		});
+	};
+
+	$scope.minusQuantityToCart = function(productId) {
+
+		$scope.setCsrfToken();
+
+		$http({
+			method : 'PUT',
+			url : '/eStore/rest/cart/cartitem/minus/' + productId
+		}).then(function successCallback() {
+			$scope.refreshCart();
+		}, function errorCallback(response) {
+			console.log(response.data);
+		});
 	};
 
 	$scope.clearCart = function() {
 
 		$scope.setCsrfToken();
 
-		$http(
-			{
-				method : 'DELETE',
-				url : '/eStore/rest/cart/' + $scope.cartId
-			}
-		).then(
-			function successCallback() {
-				$scope.refreshCart();
-			}, function errorCallback(response) {
-				console.log(response.data);
-			}
-		);
+		$http({
+			method : 'DELETE',
+			url : '/eStore/rest/cart/' + $scope.cartId
+		}).then(function successCallback() {
+			$scope.refreshCart();
+		}, function errorCallback(response) {
+			console.log(response.data);
+		});
 
 	};
 

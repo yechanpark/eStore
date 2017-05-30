@@ -15,8 +15,9 @@ public class CartService {
 	public Cart getCartById(int cartId) {
 		return cartDao.getCartById(cartId);
 	}
-	
-	public void updateCart(Cart cart){
+
+	public void updateCart(Cart cart) {
 		cartDao.updateCart(cart);
 	}
+
 }

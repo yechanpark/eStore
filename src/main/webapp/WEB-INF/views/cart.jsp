@@ -40,7 +40,11 @@
 						<td>{{item.quantity}}</td>
 						<td>{{item.totalPrice}}</td>
 						<td><a href="#" class="label label-danger" ng-click="removeFromCart(item.product.id)">
-							<span class="glyphicon glypgicon-remove"></span>remove</a></td>
+							<span class="glyphicon glyphicon-remove"></span>remove</a>
+							<a href="#" class="label label-danger" ng-click="plusQuantityToCart(item.product.id)">
+							<span class="glyphicon glypgicon-plus"></span>plus</a>
+							<a href="#" class="label label-danger" ng-click="minusQuantityToCart(item.product.id)">
+							<span class="glyphicon glypgicon-minus"></span>minus</a></td>
 					</tr>
 					
 					<tr>

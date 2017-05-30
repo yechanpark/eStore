@@ -50,12 +50,12 @@ public class CartRestController {
 
 	}
 
-	// 카트에 담을 때
+	// 카트에 처음 담을 때
 	@RequestMapping(value = "/add/{productId}", method = RequestMethod.PUT)
 	public ResponseEntity<Void> addItem(@PathVariable(value = "productId") int productId) {
 
 		// 로그인한 사람에 대한 정보를 기반으로 SpringSecurity에 의해 이름을 얻어올 수 있다.
-		// servetl-context.xml에 관련 설정을 해야한다.
+		// servlet-context.xml에 관련 설정을 해야한다.
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 
 		String username = authentication.getName();
@@ -65,19 +65,21 @@ public class CartRestController {
 
 		List<CartItem> cartItems = cart.getCartItems();
 
+		// 이미 Cart에 CartItem이 존재할 시
 		for (int i = 0; i < cartItems.size(); i++) {
 			if (product.getId() == cartItems.get(i).getProduct().getId()) {
 				CartItem cartItem = cartItems.get(i);
 				cartItem.setQuantity(cartItem.getQuantity() + 1);
 				cartItem.setTotalPrice(product.getPrice() * cartItem.getQuantity());
 				cart.setGrandTotal(cart.getGrandTotal() + product.getPrice());
-				cartItemService.addCartItem(cartItem);
+				cartItemService.updateCartItem(cartItem);
 				cartService.updateCart(cart);
 
 				return new ResponseEntity<Void>(HttpStatus.OK);
 			}
 		}
 
+		// Cart에 CartItem 처음 추가 시
 		CartItem cartItem = new CartItem();
 		cartItem.setProduct(product);
 		cartItem.setQuantity(1);
@@ -85,7 +87,7 @@ public class CartRestController {
 		cart.setGrandTotal(cart.getGrandTotal() + cartItem.getTotalPrice());
 		cartItem.setCart(cart);
 
-		cartItemService.addCartItem(cartItem);
+		cartItemService.updateCartItem(cartItem);
 
 		cart.getCartItems().add(cartItem);
 		cartService.updateCart(cart);
@@ -95,7 +97,7 @@ public class CartRestController {
 
 	}
 
-	// 카트에서 1개 제거
+	// 카트에서 CartItem 자체 제거
 	@RequestMapping(value = "/cartitem/{productId}", method = RequestMethod.DELETE)
 	public ResponseEntity<Void> removeItem(@PathVariable(value = "productId") int productId) {
 
@@ -107,11 +109,84 @@ public class CartRestController {
 
 		CartItem cartItem = cartItemService.getCartItemByProductId(cart.getCartId(), productId);
 		cart.setGrandTotal(cart.getGrandTotal() - cartItem.getTotalPrice());
-		
+
 		cartService.updateCart(cart);
 		cartItemService.removeCartItem(cartItem);
-		
-		
+
+		return new ResponseEntity<Void>(HttpStatus.NO_CONTENT);
+
+	}
+
+	// 해당 CartItem Quantity 1개 증가
+	@RequestMapping(value = "/cartitem/add/{productId}", method = RequestMethod.PUT)
+	public ResponseEntity<Void> plusQuantityToCart(@PathVariable(value = "productId") int productId) {
+
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+
+		String username = authentication.getName();
+		User user = userService.getUserByUsername(username);
+		Cart cart = user.getCart();
+
+		List<CartItem> cartItems = cart.getCartItems();
+
+		for (int i = 0; i < cartItems.size(); i++) {
+			CartItem cartItem = cartItems.get(i);
+
+			// 해당하는 Product에 대해
+			if (cartItem.getProduct().getId() == productId) {
+
+				// 현재 카트에 추가된 갯수보다 재고가 많은 경우
+				if (cartItem.getProduct().getUnitInStock() > cartItem.getQuantity()) {
+
+					// 갯수와 가격을 설정
+					cartItem.setQuantity(cartItem.getQuantity() + 1);
+					cartItem.setTotalPrice(cartItem.getTotalPrice() + cartItem.getProduct().getPrice());
+					// 카트 전체에 반영
+					cart.setGrandTotal(cart.getGrandTotal() + cartItem.getProduct().getPrice());
+
+					// Cart와 CartItem저장
+					cartItemService.updateCartItem(cartItem);
+					cartService.updateCart(cart);
+				}
+			}
+		}
+		return new ResponseEntity<Void>(HttpStatus.NO_CONTENT);
+
+	}
+
+	// 해당 CartItem Quantity 1개 감소
+	@RequestMapping(value = "/cartitem/minus/{productId}", method = RequestMethod.PUT)
+	public ResponseEntity<Void> minusQuantityToCart(@PathVariable(value = "productId") int productId) {
+
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+
+		String username = authentication.getName();
+		User user = userService.getUserByUsername(username);
+		Cart cart = user.getCart();
+
+		List<CartItem> cartItems = cart.getCartItems();
+
+		for (int i = 0; i < cartItems.size(); i++) {
+			CartItem cartItem = cartItems.get(i);
+
+			// 해당하는 Product에 대해
+			if (cartItem.getProduct().getId() == productId) {
+
+				// 현재 카트에 추가된 갯수가 0보다 큰 경우
+				if (cartItem.getQuantity() > 0) {
+
+					// 갯수와 가격을 설정
+					cartItem.setQuantity(cartItem.getQuantity() - 1);
+					cartItem.setTotalPrice(cartItem.getTotalPrice() - cartItem.getProduct().getPrice());
+					// 카트 전체에 반영
+					cart.setGrandTotal(cart.getGrandTotal() - cartItem.getProduct().getPrice());
+
+					// Cart와 CartItem저장
+					cartItemService.updateCartItem(cartItem);
+					cartService.updateCart(cart);
+				}
+			}
+		}
 
 		return new ResponseEntity<Void>(HttpStatus.NO_CONTENT);
 
@@ -123,11 +198,10 @@ public class CartRestController {
 
 		Cart cart = cartService.getCartById(cartId);
 		cart.setGrandTotal(0);
-		
+
 		cartService.updateCart(cart);
 		cartItemService.removeAllCartItems(cart);
-		
-		
+
 		return new ResponseEntity<Void>(HttpStatus.NO_CONTENT);
 
 	}
