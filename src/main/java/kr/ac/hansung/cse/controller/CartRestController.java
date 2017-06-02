@@ -57,7 +57,6 @@ public class CartRestController {
 	// 카트에 처음 담을 때
 	@RequestMapping(value = "/add/{productId}", method = RequestMethod.PUT)
 	public ResponseEntity<Void> addItem(@PathVariable(value = "productId") int productId) {
-
 		// 로그인한 사람에 대한 정보를 기반으로 SpringSecurity에 의해 이름을 얻어올 수 있다.
 		// servlet-context.xml에 관련 설정을 해야한다.
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
@@ -72,14 +71,19 @@ public class CartRestController {
 		// 이미 Cart에 CartItem이 존재할 시
 		for (int i = 0; i < cartItems.size(); i++) {
 			if (product.getId() == cartItems.get(i).getProduct().getId()) {
-				CartItem cartItem = cartItems.get(i);
-				cartItem.setQuantity(cartItem.getQuantity() + 1);
-				cartItem.setTotalPrice(product.getPrice() * cartItem.getQuantity());
-				cart.setGrandTotal(cart.getGrandTotal() + product.getPrice());
-				cartItemService.updateCartItem(cartItem);
-				cartService.updateCart(cart);
+				/*
+				 * CartItem cartItem = cartItems.get(i);
+				 * cartItem.setQuantity(cartItem.getQuantity() + 1);
+				 * cartItem.setTotalPrice(product.getPrice() *
+				 * cartItem.getQuantity());
+				 * cart.setGrandTotal(cart.getGrandTotal() +
+				 * product.getPrice());
+				 * cartItemService.updateCartItem(cartItem);
+				 * cartService.updateCart(cart);
+				 */
 
-				return new ResponseEntity<Void>(HttpStatus.OK);
+				// HTTP Status 204 No Content - 이미 카트에 존재하는 경우
+				return new ResponseEntity<Void>(HttpStatus.NO_CONTENT);
 			}
 		}
 
@@ -97,6 +101,7 @@ public class CartRestController {
 		cartService.updateCart(cart);
 		product.getCartItemList().add(cartItem);
 
+		// HTTP Status 200 OK - 성공적으로 추가됨
 		return new ResponseEntity<>(HttpStatus.OK);
 
 	}
@@ -128,9 +133,9 @@ public class CartRestController {
 
 		Logger logger = LoggerFactory.getLogger(CartRestController.class);
 		String requestMessage = request.toString();
-		
+
 		logger.info("Request Message:" + requestMessage);
-		
+
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 
 		String username = authentication.getName();
@@ -162,11 +167,11 @@ public class CartRestController {
 				}
 			}
 		}
-		
+
 		ResponseEntity<Void> response = new ResponseEntity<Void>(HttpStatus.OK);
 		String responseMessage = response.toString();
 		logger.info(responseMessage);
-		
+
 		return response;
 
 	}

@@ -13,7 +13,7 @@
 	<!-- 하이버네이트 로그 콘솔 출력 어펜더 -->
 	<appender name="CustomHibernateAppender" class="ch.qos.logback.core.ConsoleAppender">
 		<encoder>
-			<Pattern>Custom Hibernate log: - %msg %n
+			<Pattern>Custom Hibernate : %msg %n
 			</Pattern>
 		</encoder>
 	</appender>
@@ -66,15 +66,11 @@
 		<appender-ref ref="consoleAppender" />
 	</logger>
 	
-	<logger name="org.hibernate.SQL" additivity="false">
+	<logger name="customHibernateSQL" additivity="false">
 		<level value="INFO" />
 		<appender-ref ref="CustomHibernateAppender" />
 	</logger>
-	
-	<logger name="org.hibernate.type" additivity="false">
-		<level value="INFO" />
-		<appender-ref ref="CustomHibernateAppender" />
-	</logger>
+
 
 	<!-- 최상단 로거, 하위 로거에게 상속된다. -->
 	<root>

@@ -1,8 +1,11 @@
-1. User가 카트 추가하고 나서 관리자가 Product를 지워도 User의 카트에는 그대로 남아있음
+1. User가 카트 추가하고 나서 Admin이 AdminPage에서 Product를 지워도 User의 카트에는 그대로 남아있음
+목표1 -> Admin이 Product를 삭제하면 User의 Cart에 있는 모든 CartItem 중 해당 Product와 매치되는 것들을 없애고,
+목표2 -> CartItem의 TotalPrice만큼 Cart의 GrandPrice에서 제외
 
-2. CartRestController.java - addItem 함수 수정해야함
- 처음 담을 때와 이미 존재할 때의 로직을 나눠야 한다. 현재는 cart.jsp에서 +plus, -minus버튼도 동작하지만, Order Now버튼을 누를 때 마다 갯수가 1개 늘어나므로
- 이를 이미 있는 경우는 이미 존재한다고 alert창을 띄우고, 처음 추가하는 경우에만 제대로 동작하게 변경해야한다.
- Quantity는 오직 +plus, -minus로만 수정할 수 있게 해야한다. 
- 
+2. cart.jsp에서 Order Now버튼 클릭 시 Response만 제대로 넘어오면 무조건 성공적으로 수행됐다고 뜬다.
+단, 계속 누른다고 예전처럼 CartItem의 Quantity가 올라가지는 않는다.
+목표1 -> 카트에 아이템이 이미 있는 경우는 이미 존재한다고 alert창을 띄우고,
+목표2 -> 처음 추가하는 경우에만 성공적으로 추가됐다고 alert띄움
+
 3. +plus, -minus 버튼을 누르면 화면이 맨 위로 이동한다. -> 광클하기가 힘듦 
+목표1 -> 광클하기 쉽게 화면이 움직이지 않게 한다.
