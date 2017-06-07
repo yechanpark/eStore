@@ -37,4 +37,5 @@ public class Cart implements Serializable {
 	private List<CartItem> cartItems = new ArrayList<CartItem>();
 
 	private double grandTotal;
+	
 }

@@ -11,12 +11,11 @@
 
 	<!-- Enables the Spring MVC @Controller programming model -->
 	<annotation-driven>
+		<!-- 현재 로그인한 주체를 Controller에서 얻기 위해 설정해야 할 정보 -->
 		<argument-resolvers>
-			
-		<beans:bean
-			class="org.springframework.security.web.method.annotation.AuthenticationPrincipalArgumentResolver">
-		</beans:bean>
-		
+			<beans:bean
+				class="org.springframework.security.web.method.annotation.AuthenticationPrincipalArgumentResolver">
+			</beans:bean>
 		</argument-resolvers>
 	</annotation-driven>
 

@@ -1,13 +1,16 @@
-// cartApp Model 생성
+// cartApp Module 생성, []안에는 이 모듈이 의존하는 또다른 모듈을 기술한다.
 var cartApp = angular.module('cartApp', []);
 
-// cartApp Controller의 이름과 생성자 정의, $scope, $http 2개 주입
+// cartApp Controller의 이름(cartCtrl)과 정의. $scope, $http 2개 주입
 // $http의 경우 remote서버로부터 data를 읽기 위한 Angular JS의 서비스이다.
+// controller는 일종의 Function이다. 여기서는 Anonymous Function으로 생성자 함수를 구현.
+// 생성자 함수가 실행되면서 $scope에 함수들을 등록하는 것이다.
+// controller에서 %scope에는 property와 method를 등록할 수 있다.
 cartApp.controller("cartCtrl", function($scope, $http) {
 
 	/* methods를 $scope에 추가 */
 
-	// carId를 사용하여 $scope에 바인딩
+	// View(cart.jsp)로부터 넘어온 carId를 사용하여 $scope에 바인딩
 	$scope.initCartId = function(cartId) {
 		$scope.cartId = cartId;
 		$scope.refreshCart();
@@ -17,9 +20,10 @@ cartApp.controller("cartCtrl", function($scope, $http) {
 		// $http의 get method사용, Rest API(CartRestController)의 getCartById()를
 		// 호출(Request보냄)
 		$http.get('/eStore/rest/cart/' + $scope.cartId).then(
-		// 성공했을 경우(then) Rest API에 의해 반환된 Response를 가지고 Cart에 집어넣는다.
+		// 성공했을 경우(then) Rest API에 의해 반환된 JSON포맷으로 된 Response에서 data를 꺼내서
+		// $scope에 집어넣는다.
 		function successCallback(response) {
-			// getCartById()의 반환 값 (Body에 있는 내용 = cart객체)이 response.data에 해당
+			// getCartById()의 반환 값 (Body에 있는 내용 = cart객체를 Serialization한 내용)이 response.data에 해당
 			$scope.cart = response.data;
 		});
 	};
@@ -118,11 +122,13 @@ cartApp.controller("cartCtrl", function($scope, $http) {
 
 	};
 
+	// Spring Security 4를 사용하는 경우, View에서 Controller에 GET메서드를 제외한 모든 메서드에 대해  Request 시  CSRF Token을 추가해야한다.
 	$scope.setCsrfToken = function() {
 		// 헤더에 CSRF 토큰 정보가 들어간다. contoller.js의 각 함수 실행 마다 이 함수를 호출하게 한다.
 		var csrfToken = $("meta[name='_csrf']").attr("content");
 		var csrfHeader = $("meta[name='_csrf_header']").attr("content");
 
+		// $http의 헤더에 CSRF토큰 세팅
 		$http.defaults.headers.common[csrfHeader] = csrfToken;
 	};
 

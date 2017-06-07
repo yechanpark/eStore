@@ -49,7 +49,7 @@ public class CartRestController {
 
 		Cart cart = cartService.getCartById(cartId);
 
-		// ResponseEntity에 cart, HttpStatus를 담은 후 이것을 ResponseBody에 담아서 보낸다.
+		// Response Body에 cart, HttpStatus를 담은 후 이것을 ResponseBody에 담아서 보낸다.
 		return new ResponseEntity<Cart>(cart, HttpStatus.OK);
 
 	}
@@ -60,8 +60,8 @@ public class CartRestController {
 		// 로그인한 사람에 대한 정보를 기반으로 SpringSecurity에 의해 이름을 얻어올 수 있다.
 		// servlet-context.xml에 관련 설정을 해야한다.
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-
 		String username = authentication.getName();
+		
 		User user = userService.getUserByUsername(username);
 		Cart cart = user.getCart();
 		Product product = productService.getProductById(productId);
