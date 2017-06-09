@@ -3,7 +3,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://www.springframework.org/tags" prefix="spring"%>
 
-<!-- Angular JS를 사용하기 위해서는 controller에 해당하는 자바스크립트 파일을 링크해야 한다. -->
+<!-- Angular JS를 사용하는 jsp에서는 controller에 해당하는 자바스크립트 파일을 링크해야 한다. -->
 <script src="<c:url value="/resources/js/controller.js"/>"></script>
 
 <div class="container-wrapper">
@@ -16,6 +16,7 @@
 		<!-- 이 부분에서 cartCtrl 컨트롤러 객체를 생성, controller.js에 기술한 생성자 함수가 호출되어 $scope에다가 정의된 메서드들을 등록-->
 		<div class="row" ng-controller="cartCtrl">
 			<div class="col-md-6">
+				<!-- product객체는 ProductController에서 Model에 담아서 넘긴 객체이다. -->
 				<img
 					src="<c:url value="/resources/images/${product.imageFilename}"/>"
 					alt="image" style="width: 80%" />

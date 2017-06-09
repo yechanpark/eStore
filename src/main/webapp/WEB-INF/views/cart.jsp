@@ -34,6 +34,7 @@
 						<th>Action</th>
 					</tr>
 					<!-- cart객체는 controller.js에서 위에서 수행된 initCartId()가 수행되면서 refreshCart()가 수행되면서 $scope을 통해 넘어온 것이다. -->
+					<!-- 태그 내부를 루프를 돌면서 cart객체의 cartItems 사이즈만큼 돌면서 변수 item에 값을 넣는다. -->
 					<tr ng-repeat="item in cart.cartItems">
 						<!-- View에서 $scope에 있는 property에 접근할 때는 다음과 같이 기술한다. -->
 						<td>{{item.product.name}}</td>
