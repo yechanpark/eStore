@@ -44,14 +44,15 @@
 		</dependency>
 
 		<!-- ***Logging Start*** -->
-		<!-- Abstract Logging API -->
+		<!-- Abstract Logging API, 바로 SLF4J 사용 시 -->
 		<dependency>
 			<groupId>org.slf4j</groupId>
 			<artifactId>slf4j-api</artifactId>
 			<version>${org.slf4j-version}</version>
 		</dependency>
 		
-		<!-- JCL사용 시 Bridging -->
+		<!-- JCL(jakarta commons logging) 사용 시 Bridging 후 slf4j로 변환-->
+		<!-- Spring에서 기본적으로 commons logging을 사용하기 때문에 필요하다 -->
 		<dependency>
 			<groupId>org.slf4j</groupId>
 			<artifactId>jcl-over-slf4j</artifactId>
@@ -66,15 +67,16 @@
 			<version>1.2.3</version>
 		</dependency>
 		
-		<!-- 삭제
-		기존 slf4j
+		<!-- 삭제된 dependencies
+		slf4j-log4j12 : adaptation layer
 		<dependency>
 			<groupId>org.slf4j</groupId>
 			<artifactId>slf4j-log4j12</artifactId>
+			<version>${org.slf4j-version}</version>
 			<version>runtime</version>
 		</dependency>
 		
-		기존 log4j
+		log4j : non-native implementation of slf4j-api
 		<dependency>
 			<groupId>log4j</groupId>
 			<artifactId>log4j</artifactId>
