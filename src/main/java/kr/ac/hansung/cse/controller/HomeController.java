@@ -37,8 +37,11 @@ public class HomeController {
 		// client IP Address
 		String clientIPaddress = request.getRemoteAddr();
 
-		logger.info("request url:" + url);
-		logger.info("client up:" + clientIPaddress);
+		// 다음 코드보다 구현한 코드가 더  낫다.
+		// logger.info("request url: " + url);
+		// logger.info("client ip: " + clientIPaddress);
+		logger.info("request url: {}", url);
+		logger.info("client ip: {}", clientIPaddress);
 
 		return "home";
 	}
