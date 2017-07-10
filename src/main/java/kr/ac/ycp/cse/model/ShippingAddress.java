@@ -1,4 +1,4 @@
-package kr.ac.hansung.cse.model;
+package kr.ac.ycp.cse.model;
 
 import java.io.Serializable;
 

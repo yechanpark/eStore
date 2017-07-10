@@ -1,4 +1,4 @@
-package kr.ac.hansung.cse.controller;
+package kr.ac.ycp.cse.controller;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;

@@ -1,4 +1,4 @@
-package kr.ac.hansung.cse.controller;
+package kr.ac.ycp.cse.controller;
 
 import java.io.File;
 import java.io.IOException;
@@ -20,8 +20,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.multipart.MultipartFile;
 
-import kr.ac.hansung.cse.model.Product;
-import kr.ac.hansung.cse.service.ProductService;
+import kr.ac.ycp.cse.model.Product;
+import kr.ac.ycp.cse.service.ProductService;
 
 @Controller
 @RequestMapping("/admin")

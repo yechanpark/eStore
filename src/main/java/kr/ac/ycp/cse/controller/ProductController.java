@@ -1,4 +1,4 @@
-package kr.ac.hansung.cse.controller;
+package kr.ac.ycp.cse.controller;
 
 import java.util.List;
 
@@ -8,8 +8,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import kr.ac.hansung.cse.model.Product;
-import kr.ac.hansung.cse.service.ProductService;
+import kr.ac.ycp.cse.model.Product;
+import kr.ac.ycp.cse.service.ProductService;
 
 @Controller
 public class ProductController {

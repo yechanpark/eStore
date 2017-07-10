@@ -1,4 +1,4 @@
-package kr.ac.hansung.cse.dao;
+package kr.ac.ycp.cse.dao;
 
 import java.util.List;
 
@@ -11,8 +11,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
-import kr.ac.hansung.cse.model.Cart;
-import kr.ac.hansung.cse.model.CartItem;
+import kr.ac.ycp.cse.model.Cart;
+import kr.ac.ycp.cse.model.CartItem;
 
 @Repository
 @Transactional

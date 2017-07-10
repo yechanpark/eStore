@@ -1,4 +1,4 @@
-package kr.ac.hansung.cse.controller;
+package kr.ac.ycp.cse.controller;
 
 import java.util.List;
 
@@ -16,14 +16,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import kr.ac.hansung.cse.model.Cart;
-import kr.ac.hansung.cse.model.CartItem;
-import kr.ac.hansung.cse.model.Product;
-import kr.ac.hansung.cse.model.User;
-import kr.ac.hansung.cse.service.CartItemService;
-import kr.ac.hansung.cse.service.CartService;
-import kr.ac.hansung.cse.service.ProductService;
-import kr.ac.hansung.cse.service.UserService;
+import kr.ac.ycp.cse.model.Cart;
+import kr.ac.ycp.cse.model.CartItem;
+import kr.ac.ycp.cse.model.Product;
+import kr.ac.ycp.cse.model.User;
+import kr.ac.ycp.cse.service.CartItemService;
+import kr.ac.ycp.cse.service.CartService;
+import kr.ac.ycp.cse.service.ProductService;
+import kr.ac.ycp.cse.service.UserService;
 
 // @RestController의 @ResponseBody기능에 의해 Method가 Return하는 내용들이 Response의
 // Body부분에 JSON Format으로 들어간다.

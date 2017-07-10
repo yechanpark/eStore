@@ -1,4 +1,4 @@
-package kr.ac.hansung.cse.controller;
+package kr.ac.ycp.cse.controller;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -17,11 +17,11 @@ public class HomeController {
 		Logger logger = LoggerFactory.getLogger(HomeController.class);
 
 		// 패키지명을 포함하여 인자를 넘겨도 상관 없음. 이 방법은 다소 불편
-		// Logger logger = LoggerFactory.getLogger(kr.ac.hansung.cse.controller.HomeController);
+		// Logger logger = LoggerFactory.getLogger(kr.ac.ycp.cse.controller.HomeController);
 
 		/*
-		 * 이 로거는 "kr.ac.hansung.cse"라는 이름 때문에 logback.xml에 기술돼있는
-		 * kr.ac.hansung.cse logger의 자식이 되며, 따라서 상속받는다. 물론 HomeController.class로
+		 * 이 로거는 "kr.ac.ycp.cse"라는 이름 때문에 logback.xml에 기술돼있는
+		 * kr.ac.ycp.cse logger의 자식이 되며, 따라서 상속받는다. 물론 HomeController.class로
 		 * 기술하여도 상속을 받는다.
 		 */
 

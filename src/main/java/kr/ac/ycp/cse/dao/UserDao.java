@@ -1,4 +1,4 @@
-package kr.ac.hansung.cse.dao;
+package kr.ac.ycp.cse.dao;
 
 import java.util.List;
 
@@ -10,7 +10,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
-import kr.ac.hansung.cse.model.User;
+import kr.ac.ycp.cse.model.User;
 
 @Repository
 @Transactional

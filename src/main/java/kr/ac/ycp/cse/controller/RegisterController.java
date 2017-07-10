@@ -1,4 +1,4 @@
-package kr.ac.hansung.cse.controller;
+package kr.ac.ycp.cse.controller;
 
 import java.util.List;
 
@@ -11,10 +11,10 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import kr.ac.hansung.cse.model.Cart;
-import kr.ac.hansung.cse.model.ShippingAddress;
-import kr.ac.hansung.cse.model.User;
-import kr.ac.hansung.cse.service.UserService;
+import kr.ac.ycp.cse.model.Cart;
+import kr.ac.ycp.cse.model.ShippingAddress;
+import kr.ac.ycp.cse.model.User;
+import kr.ac.ycp.cse.service.UserService;
 
 @Controller
 public class RegisterController {

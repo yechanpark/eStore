@@ -1,4 +1,4 @@
-package kr.ac.hansung.cse.controller;
+package kr.ac.ycp.cse.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
@@ -7,8 +7,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import kr.ac.hansung.cse.model.User;
-import kr.ac.hansung.cse.service.UserService;
+import kr.ac.ycp.cse.model.User;
+import kr.ac.ycp.cse.service.UserService;
 
 @Controller
 @RequestMapping("/cart")

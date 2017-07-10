@@ -1,11 +1,11 @@
-package kr.ac.hansung.cse.service;
+package kr.ac.ycp.cse.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import kr.ac.hansung.cse.dao.CartItemDao;
-import kr.ac.hansung.cse.model.Cart;
-import kr.ac.hansung.cse.model.CartItem;
+import kr.ac.ycp.cse.dao.CartItemDao;
+import kr.ac.ycp.cse.model.Cart;
+import kr.ac.ycp.cse.model.CartItem;
 
 @Service
 public class CartItemService {
