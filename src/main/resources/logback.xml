@@ -58,7 +58,7 @@
 	</appender>
 
 	<!-- additivity가 false로 되어있기 때문에 root로거의 consoleAppender는 추가하지 않음 -->
-	<logger name="kr.ac.hansung.cse" additivity="false">
+	<logger name="kr.ac.ycp.cse" additivity="false">
 		<level value="INFO" />
 		<!-- 3군데에 로깅 -->
 		<appender-ref ref="dailyRollingFileAppender" />
