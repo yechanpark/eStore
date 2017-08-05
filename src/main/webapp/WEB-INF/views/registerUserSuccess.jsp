@@ -10,7 +10,7 @@
 			</div>
 		</section>
 
-		<a href="<c:url value="/"/> class="btn btn-default"> eStore Homepage </a>
+		<a href="<c:url value="/"/>" class="btn btn-default"> eStore Homepage </a>
 		
 	</div>
 
