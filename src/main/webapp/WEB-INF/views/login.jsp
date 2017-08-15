@@ -10,13 +10,14 @@
 			<div style="color:#0000ff"> <h3> ${logout} </h3> </div>
 		</c:if>
 		
+		<!-- 로그인이 실패한 유저에게만 띄운다 -->
 		<c:if test="${not empty error}">
 			<div style="color:#ff0000"> <h3> ${error} </h3> </div>
 		</c:if>
 		
 		<!-- login 의 POST Method로 이동 -->
 		<!-- login GET : 네비게이션 바에서 Login버튼 클릭 해서 "/login"이동 시 -->
-		<!-- login POST : 로그인 폼 입력 후 확인버튼을 누르면 POST방식으로 "/login"이동 시 Spring에 의해 처리된다.  -->
+		<!-- login POST : 여기서는 로그인 폼 입력 후 확인버튼을 누르면 POST방식으로 "/login"이동 시 Spring에 의해 처리된다.  -->
 		<form action="<c:url value="/login"/>" method="post">
 			<div class="form-group">
 				<label for="username">Username:</label>
